@@ -1,10 +1,10 @@
 import { StatusBar } from "expo-status-bar";
 import { useState, useCallback } from "react";
-import { SwipeListView } from 'react-native-swipe-list-view';
+import { SwipeListView } from "react-native-swipe-list-view";
 import {
   Pressable,
-  SafeAreaView,
   StyleSheet,
+  SafeAreaView,
   Text,
   TextInput,
   View,
@@ -17,7 +17,10 @@ export default function App() {
 
   const notEkle = useCallback(() => {
     if (not.trim() !== "") {
-      setNotlar(prevNotlar => [...prevNotlar, { key: `${prevNotlar.length}`, text: not }]);
+      setNotlar((prevNotlar) => [
+        ...prevNotlar,
+        { key: `${prevNotlar.length}`, text: not },
+      ]);
       setNot("");
       Keyboard.dismiss();
     } else {
@@ -26,7 +29,7 @@ export default function App() {
   }, [not]);
 
   const notSil = useCallback((rowKey) => {
-    setNotlar(prevNotlar => prevNotlar.filter(item => item.key !== rowKey));
+    setNotlar((prevNotlar) => prevNotlar.filter((item) => item.key !== rowKey));
   }, []);
 
   return (
@@ -36,7 +39,7 @@ export default function App() {
       <SwipeListView
         showsHorizontalScrollIndicator={false}
         data={notlar}
-        keyExtractor={item => item.key} // Benzersiz anahtar
+        keyExtractor={(item) => item.key}
         renderItem={(data) => (
           <View style={styles.not}>
             <Text style={styles.notText}>{data.item.text}</Text>
@@ -60,9 +63,9 @@ export default function App() {
         <TextInput
           style={styles.input}
           placeholder="Enter your task"
-          placeholderTextColor={'gray'}
+          placeholderTextColor={"gray"}
           value={not}
-          onChangeText={setNot} // Daha kısa ve daha okunabilir
+          onChangeText={setNot}
         />
         <Pressable onPress={notEkle} style={styles.btn}>
           <Text style={styles.btnText}>+</Text>
@@ -76,6 +79,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#257180",
+    paddingTop: 20,
   },
   top: {
     width: "100%",
@@ -100,7 +104,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginLeft: 10,
     borderRadius: 10,
-    backgroundColor: '#D2E0FB',
+    backgroundColor: "#D2E0FB",
   },
   btn: {
     width: "20%",
@@ -116,38 +120,38 @@ const styles = StyleSheet.create({
   },
   not: {
     width: "90%",
-    backgroundColor: '#F2E5BF',
+    backgroundColor: "#F2E5BF",
     height: 90,
     borderRadius: 15,
     margin: 10,
   },
   notText: {
     fontSize: 20,
-    color: '#CB6040',
-    textAlign: 'left',
+    color: "#CB6040",
+    textAlign: "left",
     padding: 10,
   },
   rowBack: {
-    alignItems: 'center',
-    backgroundColor: '#CB6040',
+    alignItems: "center",
+    backgroundColor: "#CB6040",
     flex: 1,
-    justifyContent: 'flex-end',
+    justifyContent: "flex-end",
     paddingRight: 15,
     borderRadius: 15,
     margin: 10,
   },
   backRightBtn: {
-    alignItems: 'center',
+    alignItems: "center",
     bottom: 0,
-    justifyContent: 'center',
-    position: 'absolute',
+    justifyContent: "center",
+    position: "absolute",
     top: 0,
     width: 75,
-    backgroundColor: '#FD8B51',
+    backgroundColor: "#FD8B51",
     right: 0,
     borderRadius: 15,
   },
   backTextWhite: {
-    color: '#FFF',
+    color: "#FFF",
   },
 });
